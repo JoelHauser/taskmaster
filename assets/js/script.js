@@ -110,6 +110,10 @@ var status = $(this)
 var index = $(this)
   .closest(".list-group-item")
   .index();
+  
+  tasks[status][index].text = text;
+  saveTasks();
+  
 //recreate p element
 var taskP = $("<p>")
   .addClass("m-1")
@@ -117,8 +121,6 @@ var taskP = $("<p>")
 //replace textarea with p element
 $(this).replaceWith(taskP);
 
-tasks[status][index].text = text;
-saveTasks();
 });
 
 //due date was clicked
@@ -141,9 +143,7 @@ dateInput.trigger("focus");
 //value of due date was changed
 $(".list-group").on("blur", "input[type='text']", function(){
 //get current text
-var date = $(this)
-  .val()
-  .trim();
+var date = $(this).val()
 //get the parent uls id attribute
 var status = $(this)
   .closest(".list-group")
